@@ -1,0 +1,69 @@
+<%- include('../partials/header', { title }) %>
+
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">
+        <i class="fas fa-<%= isEditing ? 'edit' : 'plus' %>"></i> 
+        <%= isEditing ? 'Editar' : 'Registrar' %> Reseña
+      </h4>
+    </div>
+    <div class="card-body">
+      <% if (errors && errors.length > 0) { %>
+        <div class="alert alert-danger">
+          <h5 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> Errores de validación</h5>
+          <ul class="mb-0">
+            <% errors.forEach(error => { %>
+              <li><%= error.msg %></li>
+            <% }); %>
+          </ul>
+        </div>
+      <% } %>
+
+      <form action="<%= isEditing ? `/resenas/${resena.id}?_method=PUT` : '/resenas' %>" method="POST">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="usuario_id">ID Usuario</label>
+            <input type="number" class="form-control" id="usuario_id" name="usuario_id" value="<%= resena.usuario_id || '' %>" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="restaurante_id">ID Restaurante</label>
+            <input type="number" class="form-control" id="restaurante_id" name="restaurante_id" value="<%= resena.restaurante_id || '' %>" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="calificacion">Calificación</label>
+            <select class="form-control" id="calificacion" name="calificacion" required>
+              <option value="">Seleccionar</option>
+              <% for(let i = 1; i <= 5; i++) { %>
+                <option value="<%= i %>" <%= resena.calificacion == i ? 'selected' : '' %>><%= i %> estrella<%= i > 1 ? 's' : '' %></option>
+              <% } %>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="fecha_creacion">Fecha</label>
+            <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" value="<%= resena.fecha_creacion || new Date().toISOString().split('T')[0] %>" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="comentario">Comentario</label>
+          <textarea class="form-control" id="comentario" name="comentario" rows="3" required><%= resena.comentario || '' %></textarea>
+        </div>
+
+        <div class="form-group d-flex justify-content-between">
+          <a href="/resenas" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Cancelar
+          </a>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> <%= isEditing ? 'Actualizar' : 'Guardar' %>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

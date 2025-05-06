@@ -1,0 +1,62 @@
+<%- include('../partials/header', { title }) %>
+
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="mb-0"><i class="fas fa-thumbs-up"></i> Listado de Recomendaciones</h1>
+    <a href="/recomendaciones/create" class="btn btn-primary">
+      <i class="fas fa-plus"></i> Nueva Recomendación
+    </a>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <% if (recomendaciones && recomendaciones.length > 0) { %>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead class="thead-light">
+              <tr>
+                <th>ID</th>
+                <th>Usuario</th>
+                <th>Restaurante</th>
+                <th>Fecha de Recomendación</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% recomendaciones.forEach(recomendacion => { %>
+                <tr>
+                  <td><%= recomendacion.id %></td>
+                  <td><%= recomendacion.usuario_id %></td>
+                  <td><%= recomendacion.restaurante_id %></td>
+                  <td><%= new Date(recomendacion.fecha_recomendacion).toLocaleDateString() %></td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <a href="/recomendaciones/<%= recomendacion.id %>" class="btn btn-info" data-toggle="tooltip" title="Ver detalle">
+                        <i class="fas fa-eye"></i>
+                      </a>
+                      <a href="/recomendaciones/<%= recomendacion.id %>/edit" class="btn btn-warning" data-toggle="tooltip" title="Editar">
+                        <i class="fas fa-edit"></i>
+                      </a>
+                      <form action="/recomendaciones/<%= recomendacion.id %>?_method=DELETE" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-danger" data-toggle="tooltip" title="Eliminar" onclick="confirmarEliminacion(event, 'recomendación')">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </form>
+                    </div>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      <% } else { %>
+        <div class="alert alert-info">
+          <i class="fas fa-info-circle"></i> No hay recomendaciones registradas. 
+          <a href="/recomendaciones/create" class="alert-link">Registre una nueva recomendación</a>.
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

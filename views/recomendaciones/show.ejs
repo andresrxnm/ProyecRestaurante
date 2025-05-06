@@ -1,0 +1,19 @@
+<%- include('../partials/header', { title }) %>
+
+<div class="container mt-4">
+  <h1 class="mb-4"><i class="fas fa-star"></i> Detalle de la Recomendación</h1>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title"><strong>Restaurante Recomendado:</strong> <%= recomendacion.restaurante_nombre %></h5>
+      <p class="card-text"><strong>Recomendado por:</strong> <%= recomendacion.usuario_nombre %></p>
+      <p class="card-text"><strong>Comentario:</strong> <%= recomendacion.comentario %></p>
+      <p class="card-text"><strong>Fecha de Recomendación:</strong> <%= recomendacion.fecha_recomendacion %></p>
+
+      <a href="/recomendaciones" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Volver al listado</a>
+      <a href="/recomendaciones/<%= recomendacion.id %>/edit" class="btn btn-warning mt-3"><i class="fas fa-edit"></i> Editar</a>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

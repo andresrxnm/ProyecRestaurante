@@ -1,0 +1,64 @@
+<%- include('../partials/header', { title }) %>
+
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="mb-0"><i class="fas fa-utensils"></i> Listado de Menús</h1>
+    <a href="/menus/create" class="btn btn-primary">
+      <i class="fas fa-plus"></i> Nuevo Plato
+    </a>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <% if (menus && menus.length > 0) { %>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead class="thead-light">
+              <tr>
+                <th>ID</th>
+                <th>Restaurante</th>
+                <th>Nombre del Plato</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% menus.forEach(menu => { %>
+                <tr>
+                  <td><%= menu.id %></td>
+                  <td><%= menu.restaurante_id %></td>
+                  <td><%= menu.nombre_plato %></td>
+                  <td><%= menu.descripcion && menu.descripcion.length > 40 ? menu.descripcion.slice(0, 40) + '...' : menu.descripcion %></td>
+                  <td>$<%= parseFloat(menu.precio).toFixed(2) %></td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <a href="/menus/<%= menu.id %>" class="btn btn-info" data-toggle="tooltip" title="Ver detalle">
+                        <i class="fas fa-eye"></i>
+                      </a>
+                      <a href="/menus/<%= menu.id %>/edit" class="btn btn-warning" data-toggle="tooltip" title="Editar">
+                        <i class="fas fa-edit"></i>
+                      </a>
+                      <form action="/menus/<%= menu.id %>?_method=DELETE" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-danger" data-toggle="tooltip" title="Eliminar" onclick="confirmarEliminacion(event, 'menú')">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </form>
+                    </div>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      <% } else { %>
+        <div class="alert alert-info">
+          <i class="fas fa-info-circle"></i> No hay menús registrados. 
+          <a href="/menus/create" class="alert-link">Registra un nuevo plato</a>.
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

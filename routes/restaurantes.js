@@ -29,5 +29,6 @@ router.get('/:id', restauranteController.show);  // Mostrar los detalles de un r
 router.get('/:id/edit', restauranteController.edit);  // Mostrar el formulario para editar un restaurante
 router.put('/:id', validateRestaurante, restauranteController.update);  // Actualizar un restaurante
 router.delete('/:id', restauranteController.delete);  // Eliminar un restaurante
+router.get('/', restauranteController.listarFiltrados);
 
 module.exports = router;

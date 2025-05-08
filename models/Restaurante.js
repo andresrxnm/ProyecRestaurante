@@ -68,6 +68,57 @@ class Restaurante {
       throw error;
     }
   }
+
+   async filtrarRestaurantes(filtros) {
+    let query = `
+      SELECT 
+        r.*,
+        ROUND(AVG(res.calificacion), 1) AS calificacion_promedio,
+        MIN(m.precio) AS precio_minimo
+      FROM Restaurantes r
+      LEFT JOIN Resenas res ON r.id = res.restaurante_id
+      LEFT JOIN Menus m ON r.id = m.restaurante_id
+      WHERE 1=1
+    `;
+    const params = [];
+
+    if (filtros.tipoCocina) {
+      query += ' AND r.tipo_cocina = ?';
+      params.push(filtros.tipoCocina);
+    }
+
+    if (filtros.ubicacion) {
+      query += ' AND r.ubicacion = ?';
+      params.push(filtros.ubicacion);
+    }
+
+    if (filtros.precio) {
+      query += ' AND m.precio <= ?';
+      params.push(filtros.precio);
+    }
+
+    query += ' GROUP BY r.id';
+
+    if (filtros.calificacion) {
+      query += ' HAVING calificacion_promedio >= ?';
+      params.push(filtros.calificacion);
+    }
+
+    const [rows] = await pool.query(query, params);
+    return rows;
+  }
+
+  async obtenerFiltrosUnicos() {
+    const [tipos] = await pool.query('SELECT DISTINCT tipo_cocina FROM Restaurantes');
+    const [ubicaciones] = await pool.query('SELECT DISTINCT ubicacion FROM Restaurantes WHERE ubicacion IS NOT NULL');
+    return {
+      tiposCocina: tipos.map(row => row.tipo_cocina),
+      ubicaciones: ubicaciones.map(row => row.ubicacion)
+    };
+  }
+
+
+
 }
 
 module.exports = Restaurante;

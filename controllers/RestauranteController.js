@@ -162,3 +162,33 @@ exports.show = async (req, res) => {
     });
   }
 };
+
+exports.filter = async (req, res) => {
+  const filtros = {
+    tipoCocina: req.query.tipoCocina || null,
+    ubicacion: req.query.ubicacion || null,
+    precio: req.query.precio || null,
+    calificacion: req.query.calificacion || null
+  };
+
+  try {
+    const [restaurantes, filtrosUnicos] = await Promise.all([
+      Restaurante.filtrarRestaurantes(filtros),
+      Restaurante.obtenerFiltrosUnicos()
+    ]);
+
+    res.render('restaurantes/index', {
+      title: 'Restaurantes filtrados',
+      restaurantes,
+      filtros,
+      tiposCocina: filtrosUnicos.tiposCocina,
+      ubicaciones: filtrosUnicos.ubicaciones
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).render('error', {
+      title: 'Error',
+      message: 'Hubo un error al aplicar los filtros.'
+    });
+  }
+};

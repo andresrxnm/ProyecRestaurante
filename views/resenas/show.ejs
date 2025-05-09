@@ -1,0 +1,20 @@
+<%- include('../partials/header', { title }) %>
+
+<div class="container mt-4">
+  <h1 class="mb-4"><i class="fas fa-comment"></i> Detalle de la Reseña</h1>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title"><strong>Restaurante:</strong> <%= reseña.restaurante_nombre %></h5>
+      <p class="card-text"><strong>Reseñada por:</strong> <%= reseña.usuario_nombre %></p>
+      <p class="card-text"><strong>Comentario:</strong> <%= reseña.comentario %></p>
+      <p class="card-text"><strong>Calificación:</strong> <%= reseña.calificacion %> <i class="fas fa-star"></i></p>
+      <p class="card-text"><strong>Fecha de Reseña:</strong> <%= reseña.fecha_reseña %></p>
+
+      <a href="/reseñas" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Volver al listado</a>
+      <a href="/reseñas/<%= reseña.id %>/edit" class="btn btn-warning mt-3"><i class="fas fa-edit"></i> Editar</a>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

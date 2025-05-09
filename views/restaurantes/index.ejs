@@ -1,0 +1,46 @@
+<%- include('../partials/header', { title: 'Restaurantes' }) %>
+
+<div class="container mt-4">
+
+
+  <div class="card mt-4">
+    <div class="card-body">
+      <% if (restaurantes && restaurantes.length > 0) { %>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead class="thead-light">
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Tipo de Cocina</th>
+                <th>Ubicación</th>
+                <th>Telefono</th>
+                <th>Calificación Promedio</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% restaurantes.forEach(restaurante => { %>
+                <tr>
+                  <td><%= restaurante.id %></td>
+                  <td><%= restaurante.nombre %></td>
+                  <td><%= restaurante.tipo_cocina %></td>
+                  <td><%= restaurante.ubicacion %></td>
+                  <td><%= restaurante.telefono %></td>
+                  <td><%= restaurante.promedio_calificacion ? restaurante.promedio_calificacion.toFixed(2) : 'N/A' %></td>
+                  <td>
+                    <a href="/restaurantes/<%= restaurante.id %>" class="btn btn-info">Ver</a>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      <% } else { %>
+        <p>No hay restaurantes disponibles.</p>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

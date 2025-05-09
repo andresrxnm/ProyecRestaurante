@@ -1,0 +1,81 @@
+<%- include('partials/header', { title }) %>
+
+
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title"><i class="fas fa-user-graduate"></i> usuarios</h5>
+          <p class="card-text">Gestione el registro de usuarios, actualice sus datos y consulte su información.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <a href="/usuarios" class="btn btn-sm btn-outline-primary">Ver usuarios</a>
+              <a href="/usuarios/create" class="btn btn-sm btn-primary">Nuevo usuarios</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title"><i class="fas fa-utensils"></i> Restaurantes</h5>
+          <p class="card-text">Administre los restaurantes disponibles, sus detalles y agregue nuevos restaurantes.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <a href="/restaurantes" class="btn btn-sm btn-outline-primary">Ver Restaurantes</a>
+              <a href="/restaurantes/create" class="btn btn-sm btn-primary">Nuevo Restaurante</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title"><i class="fas fa-star"></i> Reseñas de Restaurantes</h5>
+          <p class="card-text">Administra las reseñas existentes y agrega nuevas reseñas para los restaurantes disponibles en la plataforma.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <a href="/resenas" class="btn btn-sm btn-outline-primary">Ver Reseñas</a>
+              <a href="/resenas/create" class="btn btn-sm btn-primary">Nueva Reseña</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title"><i class="fas fa-utensils"></i> Menús de Restaurantes</h5>
+          <p class="card-text">Administra los platos disponibles en los menús de los restaurantes registrados en la plataforma.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <a href="/menus" class="btn btn-sm btn-outline-primary">Ver Menús</a>
+              <a href="/menus/create" class="btn btn-sm btn-primary">Nuevo Plato</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title"><i class="fas fa-star"></i> Recomendaciones de Restaurantes</h5>
+          <p class="card-text">Administra las recomendaciones que los usuarios han dejado sobre los restaurantes registrados en la plataforma.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <a href="/recomendaciones" class="btn btn-sm btn-outline-primary">Ver Recomendaciones</a>
+              <a href="/recomendaciones/create" class="btn btn-sm btn-primary">Nueva Recomendación</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+  </div>
+</div>
+
+<%- include('partials/footer') %>

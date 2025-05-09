@@ -1,0 +1,63 @@
+<%- include('../partials/header', { title }) %>
+
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">
+        <i class="fas fa-<%= isEditing ? 'edit' : 'plus' %>"></i> 
+        <%= isEditing ? 'Editar' : 'Registrar' %> Restaurante
+      </h4>
+    </div>
+    <div class="card-body">
+      <% if (errors && errors.length > 0) { %>
+        <div class="alert alert-danger">
+          <h5 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> Errores de validación</h5>
+          <ul class="mb-0">
+            <% errors.forEach(error => { %>
+              <li><%= error.msg %></li>
+            <% }); %>
+          </ul>
+        </div>
+      <% } %>
+
+      <form action="<%= isEditing ? `/restaurantes/${restaurante.id}?_method=PUT` : '/restaurantes' %>" method="POST">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="<%= restaurante.nombre || '' %>" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="tipo_cocina">Tipo de Cocina</label>
+            <input type="text" class="form-control" id="tipo_cocina" name="tipo_cocina" value="<%= restaurante.tipo_cocina || '' %>" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="ubicacion">Ubicación</label>
+            <input type="text" class="form-control" id="ubicacion" name="ubicacion" value="<%= restaurante.ubicacion || '' %>" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="telefono">Telefono</label>
+            <input type="text" class="form-control" id="telefono" name="telefono" value="<%= restaurante.telefono || '' %>" required>
+          </div>
+        </div> <!-- Cierre de div para form-row -->
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="descripcion">Descripción</label>
+            <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required><%= restaurante.descripcion || '' %></textarea>
+          </div>
+        </div>
+        <div class="form-group d-flex justify-content-between">
+          <a href="/restaurantes" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Cancelar
+          </a>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> <%= isEditing ? 'Actualizar' : 'Guardar' %>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

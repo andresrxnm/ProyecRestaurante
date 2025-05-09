@@ -1,0 +1,26 @@
+<%- include('../partials/header', { title }) %>
+
+<div class="container mt-4">
+  <h1 class="mb-4"><i class="fas fa-utensils"></i> Detalle del Menú</h1>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title"><strong>Restaurante:</strong> <%= menu.restaurante_nombre %></h5>
+      <p class="card-text"><strong>Tipo de Cocina:</strong> <%= menu.tipo_cocina %></p>
+      <p class="card-text"><strong>Descripción:</strong> <%= menu.descripcion %></p>
+      <p class="card-text"><strong>Fecha de Creación del Menú:</strong> <%= menu.fecha_creacion %></p>
+
+      <h6 class="mt-4"><strong>Platos del Menú:</strong></h6>
+      <ul>
+        <% menu.platos.forEach(function(plato) { %>
+          <li><strong><%= plato.nombre %>:</strong> <%= plato.descripcion %> - <%= plato.precio %> COP</li>
+        <% }); %>
+      </ul>
+
+      <a href="/menus" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Volver al listado</a>
+      <a href="/menus/<%= menu.id %>/edit" class="btn btn-warning mt-3"><i class="fas fa-edit"></i> Editar</a>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
